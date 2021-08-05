@@ -1,13 +1,15 @@
 import React from "react";
-
+import { Navbar } from "./components/Navbar";
+import { Main } from "./pages/Main";
 
 function App() {
   return (
-    
-        <div className="container pt-4">
-            <h1>Hello, World!</h1>
-        </div>
-      
+    <>
+      <Navbar />
+      <div className="container-fluid pt-5">
+        <Main />
+      </div>
+    </>
   );
 }
 
