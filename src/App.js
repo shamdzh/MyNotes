@@ -6,9 +6,10 @@ function App() {
   return (
     <>
       <Navbar />
-      <div className="container-fluid pt-5">
+      <div className="container pt-5">
         <Main />
       </div>
+      
     </>
   );
 }

@@ -1,6 +1,12 @@
 import React, { Fragment } from 'react';
-import { AddNoteBtn } from '../components/AddNoteBtn';
+import { Form } from '../components/Form';
 
 export const Main = () => (
-    <AddNoteBtn/>
+    <Fragment>
+        <Form/>
+        <hr/>
+    </Fragment>
+    
+    
+    
 )
