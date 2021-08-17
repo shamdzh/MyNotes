@@ -1,11 +1,31 @@
-import React, { Fragment, useState } from 'react';
+import React, {useContext, useState} from 'react';
+import { FirebaseContext } from '../context/firebase/firebaseContext';
 
+// url = https://mynotes-e2d75-default-rtdb.firebaseio.com/
 
 export const Form = () => {
     const [title, setTitle] = useState('');
     const [text, setText] = useState('');
+    const firebase = useContext(FirebaseContext);
 
     console.log(title, text);
+
+    const onSubmitHandler = (event) => {
+        event.preventDefault();
+
+        if(title.trim()) {
+            firebase.addNote(title.trim(), text.trim()).then(() => {
+                console.log("Заметка была добавлена")
+            }).catch(() => {
+                console.log("Произошла ошибка")
+            })
+
+            setTitle('');
+            setText('');
+        } else {
+            console.log("Введите название заметки")
+        }
+    }
 
     return (
         <div class="note-form">
@@ -34,7 +54,7 @@ export const Form = () => {
             </div>
 
             <div class="btnBox">
-                <button type="button" class="addBtn btn btn-lg">Добавить заметку</button>
+                <button onClick={onSubmitHandler} type="button" class="addBtn btn btn-lg">Добавить заметку</button>
             </div>
         </div>
     )
