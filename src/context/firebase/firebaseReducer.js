@@ -10,5 +10,7 @@ const handlers = {
 
 export const FirebaseReducer = (state, action) => {
     const handle = handlers[action.type || handlers.DEFAULT]
+    console.log(state);
+    console.log(action);
     return handle;
 }

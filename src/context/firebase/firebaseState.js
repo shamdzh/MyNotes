@@ -14,6 +14,21 @@ export const FirebaseState = ({children}) => {
 
     const [state, dispatch] = useReducer(FirebaseReducer, initialState);
     
+    const getNotes = async () => {
+        const res = await axios.get(`${url}/notes.json`);
+
+        const payload = Object.keys(res.data).map(key => {
+            return {
+                ...res.data[key],
+                id: key
+            }
+        })
+
+        
+        
+        console.log(res);
+
+    }
 
     const addNote = async (title, text) => {
         const note = {
@@ -31,8 +46,9 @@ export const FirebaseState = ({children}) => {
                 id: (res.data.name)
             }
 
+            
             dispatch({type:ADD_NOTE, payload})
-
+            
         } catch (e) {
             throw new Error(e.message)
         } 
@@ -40,7 +56,7 @@ export const FirebaseState = ({children}) => {
 
     return (
         <FirebaseContext.Provider value={{
-            addNote,
+            addNote, getNotes,
             notes: state.notes
         }}>
             {children}
