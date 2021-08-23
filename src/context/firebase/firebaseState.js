@@ -2,7 +2,7 @@ import React, { useReducer } from 'react';
 import axios from 'axios';
 import {FirebaseContext} from './firebaseContext';
 import {FirebaseReducer} from './firebaseReducer';
-import {ADD_NOTE} from '../types'
+import {ADD_NOTE, GET_NOTES} from '../types'
 
 
 const url = 'https://mynotes-e2d75-default-rtdb.firebaseio.com';
@@ -17,6 +17,10 @@ export const FirebaseState = ({children}) => {
     const getNotes = async () => {
         const res = await axios.get(`${url}/notes.json`);
 
+        if(res.data == null) {
+            return;
+        }
+
         const payload = Object.keys(res.data).map(key => {
             return {
                 ...res.data[key],
@@ -24,17 +28,21 @@ export const FirebaseState = ({children}) => {
             }
         })
 
+        dispatch({type: GET_NOTES, payload})
         
-        
-        console.log(res);
-
+        console.log(payload);
     }
 
     const addNote = async (title, text) => {
+
+        function reverseString(str) {
+            return str.split("-").reverse().join("-");
+        }
+     
         const note = {
             title,
             text,
-            date: new Date().toJSON()
+            date: reverseString(new Date().toJSON().substr(0, 10)).replace( /-/g, "." )
         }
 
         try {
