@@ -15,7 +15,7 @@ export const Main = () => {
       <Form />
       <hr />
 
-      <div class="d-flex d-flex justify-content-around">
+      <div class="cards__container d-flex flex-wrap justify-content-center">
         <Card notes={notes} />
       </div>
     </Fragment>

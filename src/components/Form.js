@@ -27,16 +27,6 @@ export const Form = () => {
         }
     }
 
-    const getNotesHandler = (event) => {
-        event.preventDefault();
-
-        firebase.getNotes().then(() => {
-            console.log("Заметки были получены")
-        }).catch(() => {
-            console.log("Ошибка. Не удалось получить заметки")
-        } )
-    }
-
     return (
         <div class="note-form">
             <div class="mb-3">
@@ -65,10 +55,6 @@ export const Form = () => {
 
             <div class="btnBox">
                 <button onClick={onSubmitHandler} type="button" class="addBtn btn btn-lg">Добавить заметку</button>
-            </div>
-
-            <div class="btnBox">
-                <button onClick={getNotesHandler} type="button" class="addBtn btn btn-lg">Получить заметки</button>
             </div>
         </div>
     )
