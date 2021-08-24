@@ -54,5 +54,19 @@ hr {
 
 .card {
   margin-right: 25px;
-  width: 21rem;
+  width: 16rem;
+  height: 12rem;
+
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+  &-body {
+    p {
+      margin: 0; /* Убираем внешний отступ */
+      -webkit-line-clamp: 3; /* Число отображаемых строк */
+      display: -webkit-box; /* Включаем флексбоксы */
+      -webkit-box-orient: vertical; /* Вертикальная ориентация */
+      overflow: hidden; /* Обрезаем всё за пределами блока */
+    }
+  }
 }
