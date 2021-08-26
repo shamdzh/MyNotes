@@ -1,4 +1,4 @@
-import {ADD_NOTE, GET_NOTES} from '../types'
+import {ADD_NOTE, GET_NOTES, GET_CURRENT_NOTE} from '../types'
 
 const handlers = {
     [ADD_NOTE]: (state, {payload}) => ({
@@ -8,6 +8,10 @@ const handlers = {
     [GET_NOTES]: (state, {payload}) => ({
         ...state,
         notes: payload,
+    }),
+    [GET_CURRENT_NOTE]: (state, {payload}) => ({
+        ...state,
+        currentNote: payload,
     }),
     DEFAULT: state => state
 }

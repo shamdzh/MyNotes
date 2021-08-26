@@ -10,6 +10,7 @@ export const Main = () => {
     getNotes()
   }, [])
 
+
   return (
     <Fragment>
       <Form />

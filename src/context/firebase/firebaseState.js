@@ -2,14 +2,15 @@ import React, { useReducer } from 'react';
 import axios from 'axios';
 import {FirebaseContext} from './firebaseContext';
 import {FirebaseReducer} from './firebaseReducer';
-import {ADD_NOTE, GET_NOTES} from '../types'
+import {ADD_NOTE, GET_NOTES, GET_CURRENT_NOTE} from '../types'
 
 
 const url = 'https://mynotes-e2d75-default-rtdb.firebaseio.com';
 
 export const FirebaseState = ({children}) => {
    const initialState = {
-        notes: []
+        notes: [],
+        currentNote: 'null'
     }
 
     const [state, dispatch] = useReducer(FirebaseReducer, initialState);
@@ -62,10 +63,19 @@ export const FirebaseState = ({children}) => {
         } 
     }
 
+    const getCurrentNote = (note) => {
+        const payload = {
+           ...note
+        }
+
+        dispatch({type:GET_CURRENT_NOTE, payload})
+    } 
+
     return (
         <FirebaseContext.Provider value={{
-            addNote, getNotes,
-            notes: state.notes
+            addNote, getNotes, getCurrentNote,
+            notes: state.notes,
+            currentNote: state.currentNote
         }}>
             {children}
         </FirebaseContext.Provider>
