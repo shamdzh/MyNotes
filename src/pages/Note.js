@@ -1,28 +1,36 @@
-import React, { Fragment, useContext, useEffect } from "react";
+import React, { useState, useContext } from "react";
+import { CurrentNote } from "../components/CurrentNote";
+import { useHistory } from "react-router-dom";
+import { Edit } from "../components/Edit";
 import { FirebaseContext } from "../context/firebase/firebaseContext";
-import { Card } from "../components/Card";
+
 
 export const Note = () => {
-  const { notes, getNotes, currentNote } = useContext(FirebaseContext);
+  const { currentNote } = useContext(FirebaseContext);
+  const history = useHistory();
+  const [edit, setEdit] = useState(false);
 
-  useEffect(() => {
-    getNotes()
-  }, [])
+  console.log(edit);
+  console.log(currentNote)
+  
 
-  console.log(currentNote);
   return (
+    <>
+      
+      {!edit ? <CurrentNote currentNote = {currentNote} /> : <Edit currentNote = {currentNote} />}
+      
 
-    <div class="cards__container d-flex flex-wrap justify-content-center">
-      <div class="card text-dark bg-light mb-3">
-        <div class="card-header">{currentNote.date}</div>
-        <div class="card-body">
-          <h5 class="card-title">{currentNote.title}</h5>
-          <p class="card-text">
-            {currentNote.text}
-          </p>
+      <div class="btn_group d-flex justify-content-center ">
+        <div class="btn_back" onClick={() => history.push("/")}>
+          <img src="/img/left-arrow.png" />
+          Вернуться назад
+        </div>
+        <div class="v_border"></div>
+        <div class="btn_edit" onClick={() => setEdit(true)}>
+          <img src="/img/pencil.png" />
+          Редактировать заметку
         </div>
       </div>
-    </div>
-
+    </>
   );
 };

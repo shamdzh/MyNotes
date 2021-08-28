@@ -1,14 +1,34 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState }  from "react";
 import { FirebaseContext } from "../context/firebase/firebaseContext";
+import axios from 'axios';
 
-// url = https://mynotes-e2d75-default-rtdb.firebaseio.com/
-
-export const Form = () => {
-  const [title, setTitle] = useState("");
-  const [text, setText] = useState("");
+export const Edit = ({ currentNote }) => {
+  const [title, setTitle] = useState(currentNote.title);
+  const [text, setText] = useState(currentNote.text);
   const firebase = useContext(FirebaseContext);
+  const url = 'https://mynotes-e2d75-default-rtdb.firebaseio.com';
 
-  console.log(title, text);
+  const editNotes = async (title, text) => {
+    const res = await axios.put(`${url}/notes/-MhkhXl4mPwSc_OmYpfv.json/`, {
+        title: title,
+        text: text
+    });
+
+    // if(res.data == null) {
+    //     return;
+    // }
+
+    // const payload = Object.keys(res.data).map(key => {
+    //     return {
+    //         ...res.data[key],
+    //         id: key
+    //     }
+    // })
+
+    // dispatch({type: GET_NOTES, payload})
+    
+    console.log(res);
+}
 
   const onSubmitHandler = (event) => {
     event.preventDefault();
@@ -65,11 +85,11 @@ export const Form = () => {
 
       <div class="btnBox">
         <button
-          onClick={onSubmitHandler}
+          onClick={() => editNotes(currentNote.title, currentNote.text)}
           type="button"
           class="addBtn btn btn-lg"
         >
-          Добавить заметку
+          Сохранить изменения
         </button>
       </div>
     </div>

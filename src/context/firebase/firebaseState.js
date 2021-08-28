@@ -63,6 +63,28 @@ export const FirebaseState = ({children}) => {
         } 
     }
 
+    const editNotes = async (id, title, text) => {
+        const res = await axios.put(`${url}/notes/-MhkhXl4mPwSc_OmYpfv.json/`, {
+            title: title,
+            text: text
+        });
+
+        // if(res.data == null) {
+        //     return;
+        // }
+
+        // const payload = Object.keys(res.data).map(key => {
+        //     return {
+        //         ...res.data[key],
+        //         id: key
+        //     }
+        // })
+
+        // dispatch({type: GET_NOTES, payload})
+        
+        // console.log(payload);
+    }
+
     const getCurrentNote = (note) => {
         const payload = {
            ...note
