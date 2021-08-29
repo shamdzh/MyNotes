@@ -2,7 +2,7 @@ import React, { useReducer } from 'react';
 import axios from 'axios';
 import {FirebaseContext} from './firebaseContext';
 import {FirebaseReducer} from './firebaseReducer';
-import {ADD_NOTE, GET_NOTES, GET_CURRENT_NOTE} from '../types'
+import {ADD_NOTE, GET_NOTES, GET_CURRENT_NOTE, REMOVE_NOTE, EDIT_NOTE} from '../types'
 
 
 const url = 'https://mynotes-e2d75-default-rtdb.firebaseio.com';
@@ -63,26 +63,40 @@ export const FirebaseState = ({children}) => {
         } 
     }
 
-    const editNotes = async (id, title, text) => {
-        const res = await axios.put(`${url}/notes/-MhkhXl4mPwSc_OmYpfv.json/`, {
-            title: title,
-            text: text
-        });
+    const removeNote = async id => {
+        await axios.delete(`${url}/notes/${id}.json`)
+    
+        dispatch({
+          type: REMOVE_NOTE,
+          payload: id
+        })
+      }
 
-        // if(res.data == null) {
-        //     return;
-        // }
+    const editNote = async (id, date, title, text) => {
 
-        // const payload = Object.keys(res.data).map(key => {
-        //     return {
-        //         ...res.data[key],
-        //         id: key
-        //     }
-        // })
+        const editedNotes = {
+            id,
+            date,
+            title,
+            text
+        }
 
-        // dispatch({type: GET_NOTES, payload})
-        
-        // console.log(payload);
+        try {
+            console.log("Пытаюсь отправить запрос на сервер...")
+            const res = await axios.put(`${url}/notes/${id}.json`, {
+                ...editedNotes
+            });
+            
+            const payload = {
+                ...editedNotes
+            }
+
+            console.log(res)
+            dispatch({type:EDIT_NOTE, payload})
+            
+        } catch (e) {
+            throw new Error(e.message)
+        } 
     }
 
     const getCurrentNote = (note) => {
@@ -95,7 +109,7 @@ export const FirebaseState = ({children}) => {
 
     return (
         <FirebaseContext.Provider value={{
-            addNote, getNotes, getCurrentNote,
+            addNote, getNotes, getCurrentNote, editNote, removeNote,
             notes: state.notes,
             currentNote: state.currentNote
         }}>

@@ -9,11 +9,7 @@ export const Note = () => {
   const { currentNote } = useContext(FirebaseContext);
   const history = useHistory();
   const [edit, setEdit] = useState(false);
-
-  console.log(edit);
-  console.log(currentNote)
   
-
   return (
     <>
       
