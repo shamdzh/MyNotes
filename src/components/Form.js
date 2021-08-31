@@ -1,4 +1,5 @@
 import React, { useContext, useState } from "react";
+import { AlertContext } from "../context/alert/alertContext";
 import { FirebaseContext } from "../context/firebase/firebaseContext";
 
 // url = https://mynotes-e2d75-default-rtdb.firebaseio.com/
@@ -7,6 +8,7 @@ export const Form = () => {
   const [title, setTitle] = useState("");
   const [text, setText] = useState("");
   const firebase = useContext(FirebaseContext);
+  const {show} = useContext(AlertContext);
 
   console.log(title, text);
 
@@ -18,15 +20,20 @@ export const Form = () => {
         .addNote(title.trim(), text.trim())
         .then(() => {
           console.log("Заметка была добавлена");
+          show('Заметка была создана', 'success')
+          
         })
         .catch(() => {
           console.log("Произошла ошибка");
+          show("Произошла ошибка", 'danger')
         });
+
 
       setTitle("");
       setText("");
     } else {
       console.log("Введите название заметки");
+      show('Введите название заметки')
     }
   };
 

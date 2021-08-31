@@ -6,6 +6,7 @@ import { BrowserRouter, Switch, Route, useLocation } from "react-router-dom";
 import { Note } from "./pages/Note";
 import { useTransition, animated } from "react-spring";
 import { Alert } from "./components/Alert";
+import { AlertState } from "./context/alert/alertState";
 
 function App() {
   const location = useLocation();
@@ -20,6 +21,7 @@ function App() {
 
   return (
     <FirebaseState>
+      <AlertState>
       <Navbar />
       <div className="container pt-5" style={{position:'relative', height: "90vh"}}>
         <Alert />
@@ -34,6 +36,7 @@ function App() {
           </animated.div>
         ))}
       </div>
+      </AlertState>
     </FirebaseState>
   );
 }

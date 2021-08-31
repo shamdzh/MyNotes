@@ -1,11 +1,19 @@
-import React from "react";
+import React, { useContext } from "react";
+import { AlertContext } from "../context/alert/alertContext";
 
 export const Alert = () => {
+  const { alert, hide } = useContext(AlertContext);
+
+
+  if(!alert.visible) {
+    return null;
+  }
+
   return (
-    <div class="alert alert-warning alert-dismissible fade show" role="alert">
-      <strong>Holy guacamole!</strong> You should check in on some of those
-      fields below.
+    <div class={`alert alert-${alert.type || 'warning'} alert-dismissible fade show`} role="alert">
+      {alert.text}
       <button
+        onClick = {hide}
         type="button"
         class="btn-close"
         data-bs-dismiss="alert"

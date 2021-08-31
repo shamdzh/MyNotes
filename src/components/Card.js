@@ -1,9 +1,11 @@
 import React, { useContext } from "react";
 import { FirebaseContext } from "../context/firebase/firebaseContext";
 import { useHistory } from "react-router-dom";
+import { AlertContext } from "../context/alert/alertContext";
 
 export const Card = ({ notes }) => {
   const { getCurrentNote, removeNote } = useContext(FirebaseContext);
+  const { show } = useContext(AlertContext);
   let history = useHistory();
 
   return notes.map((note) => (
@@ -15,7 +17,9 @@ export const Card = ({ notes }) => {
         {note.date}
         <button onClick={(e) => {
           e.stopPropagation()
-          removeNote(note.id)
+          removeNote(note.id).then(() => {
+            show("Заметка была удалена...", 'success')
+          })
           console.log("Удаление заметки...")
         }} type="button" class="btn-close" aria-label="Close"></button>
         </div>
