@@ -5,6 +5,7 @@ import { Main } from "./pages/Main";
 import { BrowserRouter, Switch, Route, useLocation } from "react-router-dom";
 import { Note } from "./pages/Note";
 import { useTransition, animated } from "react-spring";
+import { Alert } from "./components/Alert";
 
 function App() {
   const location = useLocation();
@@ -13,7 +14,7 @@ function App() {
     from: { opacity: 0 },
     enter: { opacity: 1 },
     leave: { opacity: 0, display:'none' },
-    config: { duration: 700 }
+    config: { duration: 350 }
    
   });
 
@@ -21,6 +22,7 @@ function App() {
     <FirebaseState>
       <Navbar />
       <div className="container pt-5" style={{position:'relative', height: "90vh"}}>
+        <Alert />
         {transitions((props, item) => (
           <animated.div style={props}>
             <div style={{position: "absolute", width:"100%"}}>
