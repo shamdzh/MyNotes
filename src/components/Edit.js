@@ -1,13 +1,13 @@
-import React, { useContext, useState }  from "react";
+import React, { useContext, useState } from "react";
 import { FirebaseContext } from "../context/firebase/firebaseContext";
-import axios from 'axios';
+import axios from "axios";
+import { AlertContext } from "../context/alert/alertContext";
 
 export const Edit = ({ currentNote }) => {
   const [title, setTitle] = useState(currentNote.title);
   const [text, setText] = useState(currentNote.text);
   const firebase = useContext(FirebaseContext);
-
-
+  const {show} = useContext(AlertContext);
 
   return (
     <div class="note-form">
@@ -44,7 +44,12 @@ export const Edit = ({ currentNote }) => {
 
       <div class="btnBox">
         <button
-          onClick={() => firebase.editNote(currentNote.id, currentNote.date, title, text)}
+          onClick={() => {
+            firebase.editNote(currentNote.id, currentNote.date, title, text).then(() => {
+              show("Заметка была сохранена", "success");
+            });
+            
+          }}
           type="button"
           class="addBtn btn btn-lg"
         >

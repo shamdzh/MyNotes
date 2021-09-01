@@ -5,12 +5,14 @@ import { AlertContext } from "../context/alert/alertContext";
 
 export const Card = ({ notes }) => {
   const { getCurrentNote, removeNote } = useContext(FirebaseContext);
-  const { show } = useContext(AlertContext);
+  const { show, hide } = useContext(AlertContext);
   let history = useHistory();
 
   return notes.map((note) => (
     <div onClick={() => {
       getCurrentNote(note)
+      hide()
+
       history.push("/note");
     }} class="card text-dark bg-light mb-3">
       <div class="card-header d-flex justify-content-between align-items-center">
