@@ -1,24 +1,43 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { AlertContext } from "../context/alert/alertContext";
+import { useTransition, animated } from "react-spring";
 
 export const Alert = () => {
   const { alert, hide } = useContext(AlertContext);
 
+  const transitions = useTransition(alert.visible, {
+    from: {},
+    enter: { opacity: 1 },
+    leave: { opacity: 0 }
+  })
 
-  if(!alert.visible) {
-    return null;
-  }
+  return transitions(
+    (styles, item) => 
+    item && <animated.div style={styles}>
+        <div class={`alert alert-${alert.type || 'warning'} alert-dismissible fade show`} role="alert">
+          {alert.text}
+          <button
+            onClick = {hide}
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="alert"
+            aria-label="Close"
+          ></button>
+        </div>
+    </animated.div>
+  )
 
-  return (
-    <div class={`alert alert-${alert.type || 'warning'} alert-dismissible fade show`} role="alert">
-      {alert.text}
-      <button
-        onClick = {hide}
-        type="button"
-        class="btn-close"
-        data-bs-dismiss="alert"
-        aria-label="Close"
-      ></button>
-    </div>
-  );
+  // return (
+
+    // <div class={`alert alert-${alert.type || 'warning'} alert-dismissible fade show`} role="alert">
+    //   {alert.text}
+    //   <button
+    //     onClick = {hide}
+    //     type="button"
+    //     class="btn-close"
+    //     data-bs-dismiss="alert"
+    //     aria-label="Close"
+    //   ></button>
+    // </div>
+  // );
 };

@@ -26,12 +26,12 @@ export const Note = () => {
         </div>
         <div class="v_border"></div>
         <div
-          class="btn_edit"
+          class="btn_edit d-flex"
           onClick={() => {
             setEdit(true);
           }}
         >
-          <img src="/img/pencil.png" />
+          <div><img src="/img/pencil.png" /></div>
           Редактировать заметку
         </div>
       </div>

@@ -13,21 +13,20 @@ function App() {
   console.log(location);
   const transitions = useTransition(location, { 
     from: { opacity: 0 },
-    enter: { opacity: 1 },
+    enter: { opacity: 1, position:'relative'},
     leave: { opacity: 0, display:'none' },
     config: { duration: 350 }
-   
   });
 
   return (
     <FirebaseState>
       <AlertState>
       <Navbar />
-      <div className="container pt-5" style={{position:'relative', height: "90vh"}}>
+      <div className="container pt-4" style={{height:"90vh" }}>
         <Alert />
         {transitions((props, item) => (
           <animated.div style={props}>
-            <div style={{position: "absolute", width:"100%"}}>
+            <div style={{position: "absolute", width: "100%"}}>
             <Switch location={item}>
               <Route exact path="/" component={Main} />
               <Route exact path="/note" component={Note} />
