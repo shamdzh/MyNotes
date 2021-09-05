@@ -7,18 +7,15 @@ export const Main = () => {
   const { notes, getNotes } = useContext(FirebaseContext);
 
   useEffect(() => {
-    getNotes()
-  }, [])
-
+    getNotes();
+  }, []);
 
   return (
     <Fragment>
       <Form />
       <hr />
 
-      <div class="cards__container d-flex flex-wrap justify-content-center">
-        <Card notes={notes} />
-      </div>
+      <Card notes={notes} />
     </Fragment>
   );
 };

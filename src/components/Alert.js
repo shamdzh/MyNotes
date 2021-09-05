@@ -6,12 +6,14 @@ export const Alert = () => {
   const { alert, hide } = useContext(AlertContext);
 
   const transitions = useTransition(alert.visible, {
-    from: {},
+    from: {opacity: 0},
     enter: { opacity: 1 },
-    leave: { opacity: 0 }
+    leave: { opacity: 0 },
+    config: { duration: 400 }
+    
   })
 
-  return transitions(
+  return transitions (
     (styles, item) => 
     item && <animated.div style={styles}>
         <div class={`alert alert-${alert.type || 'warning'} alert-dismissible fade show`} role="alert">
