@@ -7,6 +7,7 @@ import { Note } from "./pages/Note";
 import { useTransition, animated } from "react-spring";
 import { Alert } from "./components/Alert";
 import { AlertState } from "./context/alert/alertState";
+import { Login } from "./components/Login";
 
 function App() {
   const location = useLocation();
@@ -22,6 +23,7 @@ function App() {
     <FirebaseState>
       <AlertState>
       <Navbar />
+      <Login/>
       <div className="container pt-4" style={{height:"90vh" }}>
         <Alert />
         {transitions((props, item) => (
