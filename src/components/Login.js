@@ -1,29 +1,32 @@
 import React, { useContext, useEffect, useState } from "react";
-import { GoogleContext } from "..";
-import { signInWithPopup, GoogleAuthProvider } from "firebase/auth";
+import { LoginContext } from "..";
+import { signInWithPopup, GoogleAuthProvider, signOut } from "firebase/auth";
 import { useAuthState } from "react-firebase-hooks/auth";
 
 export const Login = () => {
-  const { auth } = useContext(GoogleContext);
+  const { auth } = useContext(LoginContext);
   const [user] = useAuthState(auth);
   const [userName, setName] = useState("");
+  const provider = new GoogleAuthProvider();
 
-  useEffect(() => { 
+  useEffect(() => {
     console.log(user)
 
     if (user) {
-      console.log("Вы авторизованы");
-      console.log(user)
-      setName(user.displayName);
+      localStorage.setItem('user', JSON.stringify(user));
+      console.log(localStorage.getItem('user'))
+      // console.log("Вы авторизованы");
+      // console.log(user)
+
     } else {
-      console.log("Вы не авторизованы");
-      console.log(user)
-      setName("Вы не авторизованы");
-    } 
-  }, []);
+      // console.log("Вы не авторизованы");
+      // console.log(user)
+      // setName("Вы не авторизованы");
+    }
+  }, [userName]);
 
   const login = () => {
-    const provider = new GoogleAuthProvider();
+    
 
     signInWithPopup(auth, provider)
       .then((result) => {
@@ -37,23 +40,38 @@ export const Login = () => {
     console.log(provider);
   };
 
-  return (
-    <div class="d-flex flex-wrap justify-content-center">
-      <button class="authBtn btn btn-primary" type="submit" onClick={login}>
-        Войти
-      </button>
+  const logOut = () => {
+    signOut(auth).then(() => {
+      console.log("Sign-out successful");
+      localStorage.removeItem('user');
+    })
+    .then(() => {
+      setName('');
+    })
+    .catch((error) => {
+      console.log("Ошибка выхода")
+    });
+  };
 
-      <button
-        class="authBtn btn btn-primary"
-        type="submit"
-        onClick={() => {
-          console.log(auth.signOut());
-        }}
-      >
-        Выйти
-      </button>
-     
-      <div>Вы вошли как: {userName}</div>
-    </div>
-  );
+  return localStorage.getItem('user') ?
+    (
+      <>
+        <div>Вы успешно авторизованы, {JSON.parse(localStorage.getItem('user')).displayName}</div>
+        <button
+          class="authBtn btn btn-primary"
+          type="submit"
+          onClick={logOut}
+        >
+          Выйти
+        </button>
+      </>
+    )
+    :
+    (
+      <div class="d-flex flex-wrap justify-content-center">
+        <button class="authBtn btn btn-primary" type="submit" onClick={login}>
+          Войти
+        </button>
+      </div>
+    )
 };

@@ -28,16 +28,16 @@ const firebase = initializeApp(firebaseConfig);
 const auth = getAuth();
 const firestore = getFirestore();
 
-export const GoogleContext = createContext();
+export const LoginContext = createContext();
 
 ReactDOM.render(
-  <GoogleContext.Provider value={{
+  <LoginContext.Provider value={{
     firebase, auth, firestore
   }}>
     <BrowserRouter>
       <App />
     </BrowserRouter>
-  </GoogleContext.Provider>,
+  </LoginContext.Provider>,
   document.getElementById("root")
 );
 
