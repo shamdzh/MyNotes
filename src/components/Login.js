@@ -6,28 +6,23 @@ import { useAuthState } from "react-firebase-hooks/auth";
 export const Login = () => {
   const { auth } = useContext(LoginContext);
   const [user] = useAuthState(auth);
-  const [userName, setName] = useState("");
+  const [userName, setName] = useState('');
   const provider = new GoogleAuthProvider();
 
   useEffect(() => {
-    console.log(user)
+    console.log("Сработал метод useEffect")
 
-    if (user) {
-      localStorage.setItem('user', JSON.stringify(user));
-      console.log(localStorage.getItem('user'))
-      // console.log("Вы авторизованы");
-      // console.log(user)
+      if (user) {
+        console.log("Вы успешно авторизовались")
+        localStorage.setItem('user', JSON.stringify(user));
+      } else {
+        console.log("Вы не авторизованы")
+      }
 
-    } else {
-      // console.log("Вы не авторизованы");
-      // console.log(user)
-      // setName("Вы не авторизованы");
-    }
-  }, [userName]);
+
+  }, [user]);
 
   const login = () => {
-    
-
     signInWithPopup(auth, provider)
       .then((result) => {
         console.log(result);
@@ -36,21 +31,19 @@ export const Login = () => {
       .catch((error) => {
         console.log(error);
       });
-
-    console.log(provider);
   };
 
   const logOut = () => {
-    signOut(auth).then(() => {
+    signOut(auth)
+    .then(() => {
       console.log("Sign-out successful");
       localStorage.removeItem('user');
-    })
-    .then(() => {
-      setName('');
+      setName('SignOut');
+      
     })
     .catch((error) => {
-      console.log("Ошибка выхода")
-    });
+        console.log("Ошибка выхода")
+      });
   };
 
   return localStorage.getItem('user') ?
