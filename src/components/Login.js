@@ -6,27 +6,32 @@ import { useAuthState } from "react-firebase-hooks/auth";
 export const Login = () => {
   const { auth } = useContext(LoginContext);
   const [user] = useAuthState(auth);
-  const [userName, setName] = useState('');
   const provider = new GoogleAuthProvider();
+  const [check, setCheck] = useState(false);
+  
 
   useEffect(() => {
     console.log("Сработал метод useEffect")
+    
 
       if (user) {
+        console.log(user)
         console.log("Вы успешно авторизовались")
-        localStorage.setItem('user', JSON.stringify(user));
       } else {
+        console.log(user)
         console.log("Вы не авторизованы")
       }
+  }, [check]);
 
 
-  }, [user]);
+
 
   const login = () => {
     signInWithPopup(auth, provider)
       .then((result) => {
         console.log(result);
-        setName(result.user.displayName);
+        localStorage.setItem('user', JSON.stringify(result.user))
+        setCheck(!check)
       })
       .catch((error) => {
         console.log(error);
@@ -38,8 +43,7 @@ export const Login = () => {
     .then(() => {
       console.log("Sign-out successful");
       localStorage.removeItem('user');
-      setName('SignOut');
-      
+      setCheck(!check)
     })
     .catch((error) => {
         console.log("Ошибка выхода")
