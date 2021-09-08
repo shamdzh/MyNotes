@@ -23,7 +23,6 @@ function App() {
     <FirebaseState>
       <AlertState>
       <Navbar />
-      <Login/>
       <div className="container pt-4" style={{height:"90vh" }}>
         <Alert />
         {transitions((props, item) => (
