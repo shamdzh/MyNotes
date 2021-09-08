@@ -28,18 +28,4 @@ export const Alert = () => {
         </div>
     </animated.div>
   )
-
-  // return (
-
-    // <div class={`alert alert-${alert.type || 'warning'} alert-dismissible fade show`} role="alert">
-    //   {alert.text}
-    //   <button
-    //     onClick = {hide}
-    //     type="button"
-    //     class="btn-close"
-    //     data-bs-dismiss="alert"
-    //     aria-label="Close"
-    //   ></button>
-    // </div>
-  // );
 };

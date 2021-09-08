@@ -1,10 +1,6 @@
 import React from "react";
 
-
 export const CurrentNote = ({currentNote}) => {
-  console.log(currentNote)
-  
-
   return (
     <section class="fdb-block">
       <div class="container">
