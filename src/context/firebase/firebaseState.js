@@ -9,6 +9,7 @@ import { initializeApp } from 'firebase/app';
 import { getAuth } from 'firebase/auth';
 import { getFirestore } from 'firebase/firestore';
 import { useAuthState } from "react-firebase-hooks/auth";
+import { signInWithPopup, signOut, GoogleAuthProvider } from "firebase/auth";
 
 
 
@@ -138,7 +139,8 @@ export const FirebaseState = ({ children }) => {
             addNote, getNotes, getCurrentNote, editNote, removeNote,
             notes: state.notes,
             currentNote: state.currentNote,
-            firebase, auth, firestore, user
+            firebase, auth, firestore, user,
+            signInWithPopup, signOut, GoogleAuthProvider
         }}>
             {children}
         </FirebaseContext.Provider>

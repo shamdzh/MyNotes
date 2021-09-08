@@ -8,6 +8,7 @@ import { useTransition, animated } from "react-spring";
 import { Alert } from "./components/Alert";
 import { AlertState } from "./context/alert/alertState";
 import { Login } from "./components/Login";
+import { Auth } from "./pages/Auth";
 
 function App() {
   const location = useLocation();
@@ -30,6 +31,7 @@ function App() {
             <div style={{position: "absolute", width: "100%"}}>
             <Switch location={item}>
               <Route exact path="/" component={Main} />
+              <Route exact path="/auth" component={Auth} />
               <Route exact path="/note" component={Note} />
             </Switch>
             </div>

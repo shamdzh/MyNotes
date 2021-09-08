@@ -7,7 +7,7 @@ import { CSSTransition, TransitionGroup } from "react-transition-group";
 export const Card = ({ notes }) => {
   const { getCurrentNote, removeNote } = useContext(FirebaseContext);
   const { show, hide } = useContext(AlertContext);
-  let history = useHistory();
+  const history = useHistory();
 
   return (
     <div class="cards__container d-flex flex-wrap justify-content-center">
