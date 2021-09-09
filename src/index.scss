@@ -30,17 +30,7 @@ code {
   text-align: center;
 }
 
-.authBtn {
-  background-color: rgb(79, 130, 163);
-  color: #fff;
-  width: 400px;
-  padding: 8px;
-  margin: 20px;
 
-  &:hover {
-    color: rgb(230, 230, 230);
-  }
-}
 
 .note-form {
   padding-top: 30px;
@@ -181,4 +171,58 @@ hr {
 
 .outBtn {
   padding: 3px 40px;
+}
+
+.auth {
+  background-color: #f2f2f2;
+  height: 100vh;
+}
+
+.auth_inner {
+  display: flex;
+  padding-top: 30px;
+  
+}
+
+.auth_img, .auth_form {
+  width: 50%;
+}
+
+.auth_form {
+  text-align: center;
+  background-color: #fff;
+
+  .auth_title {
+    font-size: 1.6rem;
+    font-weight: 500;
+    color: rgb(70, 70, 70);
+  }
+
+  .auth_subtitle {
+    padding-top: 5px;
+    font-weight: 400;
+    color: rgb(170, 170, 170);
+  }
+}
+
+.auth_img {
+  img {
+    width: 100%;
+    height: auto;
+  }
+}
+
+
+
+.authBtn {
+  background-color: rgb(79, 130, 163);
+  color: #fff;
+  width: 80%;
+  padding: 8px;
+  margin: 20px;
+  font-weight: 500;
+
+  &:hover {
+    color: rgb(230, 230, 230);
+  }
 }

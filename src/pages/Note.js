@@ -1,5 +1,6 @@
 import React, { useState, useContext } from "react";
 import { CurrentNote } from "../components/CurrentNote";
+import { Navbar } from "../components/Navbar";
 import { useHistory } from "react-router-dom";
 import { Edit } from "../components/Edit";
 import { FirebaseContext } from "../context/firebase/firebaseContext";
@@ -13,6 +14,7 @@ export const Note = () => {
 
   return (
     <>
+    <Navbar />
       {!edit ? (
         <CurrentNote currentNote={currentNote} />
       ) : (

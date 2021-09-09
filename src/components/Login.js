@@ -34,10 +34,20 @@ export const Login = () => {
   };
 
   return (
-    <div class="d-flex flex-wrap justify-content-center">
-      <button class="authBtn btn" type="submit" onClick={login}>
-        Войти
-      </button>
+
+    <div className="auth">
+      <div className="auth_inner container">
+        <div className="auth_img">
+          <img src="/img/authpic.jpg" />
+        </div>
+        <div className="auth_form d-flex flex-column justify-content-center align-items-center">
+          <div className="auth_title">My Notes</div>
+          <div className="auth_subtitle">Непременно одно из лучших решений для ведения заметок</div>
+          <button class="authBtn btn" type="submit" onClick={login}>
+            Войти через Google
+          </button>
+        </div>
+      </div>
     </div>
   )
 };
