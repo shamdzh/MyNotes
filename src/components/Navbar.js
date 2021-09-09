@@ -10,11 +10,11 @@ export const Navbar = () => {
   return localStorage.getItem('user') ?
     (
       <nav className="navbar navbar-dark navbar-expand-lg">
-        <div className="d-flex justify-content-between">
+        <div className="navbar-box d-flex justify-content-between">
           <div className="navbar-brand">Note App</div>
-          <div className="userName">
-            Добро пожаловать, {JSON.parse(localStorage.getItem('user')).displayName}
-            <button type="submit" onClick={async () => {
+          <div className="userName d-flex align-items-center">
+            <p>Добро пожаловать, {JSON.parse(localStorage.getItem('user')).displayName}</p>
+            <button className="outBtn btn btn-outline-light" type="submit" onClick={async () => {
               await signOut(auth)
                 .then(() => {
                   hide();

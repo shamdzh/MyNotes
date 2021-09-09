@@ -16,10 +16,6 @@ code {
 
 .container {
   max-width: 1140px;
-
-  @media (max-width: 450px) {
-    padding-top: 1rem !important;
-  }
 }
 
 .navbar {
@@ -46,6 +42,10 @@ code {
   }
 }
 
+.note-form {
+  padding-top: 30px;
+}
+
 .addBtn {
   background-color: rgb(79, 130, 163);
   color: #fff;
@@ -68,7 +68,7 @@ hr {
 
 .cards__container {
   padding-top: 12px;
-  margin-right: -25px;
+//  margin-right: -25px;
 }
 
 .card {
@@ -167,4 +167,18 @@ hr {
 
 .userName {
   color: #fff;
+  margin-right: 20px;
+  
+  p {
+    margin-right: 20px;
+    margin-bottom: 0;
+  }
+}
+
+.navbar-box {
+  width: 100%;
+}
+
+.outBtn {
+  padding: 3px 40px;
 }

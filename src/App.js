@@ -23,9 +23,7 @@ function App() {
   return (
     <FirebaseState>
       <AlertState>
-      <Navbar />
-      <div className="container pt-4" style={{height:"90vh" }}>
-        <Alert />
+      
         {transitions((props, item) => (
           <animated.div style={props}>
             <div style={{position: "absolute", width: "100%"}}>
@@ -37,7 +35,7 @@ function App() {
             </div>
           </animated.div>
         ))}
-      </div>
+      
       </AlertState>
     </FirebaseState>
   );
