@@ -24,6 +24,7 @@ code {
   &-brand {
     padding-left: 20px;
   }
+  margin-bottom: 20px;
 }
 
 .btnBox {
@@ -33,7 +34,7 @@ code {
 
 
 .note-form {
-  padding-top: 30px;
+  padding-top: 20px;
 }
 
 .addBtn {
@@ -173,15 +174,24 @@ hr {
   padding: 3px 40px;
 }
 
+.currentNote {
+  padding-top: 40px;
+  text-align: justify;
+
+  h1 {
+    text-align: center;
+  }
+}
+
 .auth {
   background-color: #f2f2f2;
   height: 100vh;
+  display: flex;
+  align-items: center;
 }
 
 .auth_inner {
   display: flex;
-  padding-top: 30px;
-  
 }
 
 .auth_img, .auth_form {
@@ -193,7 +203,7 @@ hr {
   background-color: #fff;
 
   .auth_title {
-    font-size: 1.6rem;
+    font-size: 2rem;
     font-weight: 500;
     color: rgb(70, 70, 70);
   }
@@ -201,7 +211,7 @@ hr {
   .auth_subtitle {
     padding-top: 5px;
     font-weight: 400;
-    color: rgb(170, 170, 170);
+    color: rgb(136, 136, 136);
   }
 }
 
@@ -219,7 +229,7 @@ hr {
   color: #fff;
   width: 80%;
   padding: 8px;
-  margin: 20px;
+  margin: 22px;
   font-weight: 500;
 
   &:hover {

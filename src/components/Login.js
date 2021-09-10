@@ -41,7 +41,7 @@ export const Login = () => {
           <img src="/img/authpic.jpg" />
         </div>
         <div className="auth_form d-flex flex-column justify-content-center align-items-center">
-          <div className="auth_title">My Notes</div>
+          <div className="auth_title">MY NOTES</div>
           <div className="auth_subtitle">Непременно одно из лучших решений для ведения заметок</div>
           <button class="authBtn btn" type="submit" onClick={login}>
             Войти через Google
