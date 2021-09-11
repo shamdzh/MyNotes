@@ -48,6 +48,7 @@ export const Form = () => {
           class="form-control"
           id="exampleFormControlInput1"
           placeholder="Введите название заметки"
+          autocomplete="off"
           value={title}
           onChange={(e) => {
             setTitle(e.target.value);

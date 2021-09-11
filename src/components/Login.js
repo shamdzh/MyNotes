@@ -38,7 +38,7 @@ export const Login = () => {
     <div className="auth">
       <div className="auth_inner container">
         <div className="auth_img">
-          <img src="/img/authpic.jpg" />
+          <img src="/img/1.jpg" />
         </div>
         <div className="auth_form d-flex flex-column justify-content-center align-items-center">
           <div className="auth_title">MY NOTES</div>

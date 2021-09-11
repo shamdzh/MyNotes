@@ -17,7 +17,6 @@ export const Main = () => {
 
   return localStorage.getItem("user") ? (
     <Fragment>
-      <Navbar />
       <div className="container" style={{ height: "90vh" }}>
         <Alert />
         <Form />

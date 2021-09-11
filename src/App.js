@@ -23,7 +23,7 @@ function App() {
   return (
     <FirebaseState>
       <AlertState>
-      
+      <Navbar />
         {transitions((props, item) => (
           <animated.div style={props}>
             <div style={{position: "absolute", width: "100%"}}>

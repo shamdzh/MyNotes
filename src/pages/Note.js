@@ -14,7 +14,6 @@ export const Note = () => {
 
   return (
     <>
-    <Navbar />
       {!edit ? (
         <CurrentNote currentNote={currentNote} />
       ) : (

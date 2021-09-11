@@ -11,7 +11,7 @@ export const Navbar = () => {
     (
       <nav className="navbar navbar-dark navbar-expand-lg">
         <div className="navbar-box d-flex justify-content-between">
-          <div className="navbar-brand">Note App</div>
+          <div className="navbar-brand">MY NOTES</div>
           <div className="userName d-flex align-items-center">
             <p>Добро пожаловать, {JSON.parse(localStorage.getItem('user')).displayName}</p>
             <button className="outBtn btn btn-outline-light" type="submit" onClick={async () => {
@@ -31,9 +31,7 @@ export const Navbar = () => {
     )
     :
     (
-      <nav className="navbar navbar-dark navbar-expand-lg">
-        <div className="navbar-brand">Note App</div>
-      </nav>
+      ''
     )
 
 }
