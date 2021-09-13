@@ -1,19 +1,18 @@
 import React, { useState, useContext } from "react";
 import { CurrentNote } from "../components/CurrentNote";
-import { Navbar } from "../components/Navbar";
+import { Alert } from "../components/Alert";
 import { useHistory } from "react-router-dom";
 import { Edit } from "../components/Edit";
 import { FirebaseContext } from "../context/firebase/firebaseContext";
-import { AlertContext } from "../context/alert/alertContext";
 
 export const Note = () => {
   const { currentNote } = useContext(FirebaseContext);
   const history = useHistory();
   const [edit, setEdit] = useState(false);
-  const { show } = useContext(AlertContext);
 
   return (
-    <>
+    <div className="container" style={{ height: "90vh" }}>
+      <Alert />
       {!edit ? (
         <CurrentNote currentNote={currentNote} />
       ) : (
@@ -28,14 +27,11 @@ export const Note = () => {
         <div class="v_border"></div>
         <div
           class="btn_edit d-flex"
-          onClick={() => {
-            setEdit(true);
-          }}
-        >
+          onClick={() => {setEdit(true);}}>
           <div><img src="/img/pencil.png" /></div>
           Редактировать заметку
         </div>
       </div>
-    </>
+    </div>
   );
 };

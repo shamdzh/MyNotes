@@ -6,3 +6,4 @@ export const GET_CURRENT_NOTE = 'GET_CURRENT_NOTE';
 export const EDIT_NOTE = 'EDIT_NOTE'
 export const HIDE_ALERT = 'HIDE_ALERT'
 export const SHOW_ALERT = 'SHOW_ALERT'
+export const LOGIN = 'CHECK_LOGIN'

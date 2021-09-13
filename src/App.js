@@ -9,6 +9,7 @@ import { Alert } from "./components/Alert";
 import { AlertState } from "./context/alert/alertState";
 import { Login } from "./components/Login";
 import { Auth } from "./pages/Auth";
+import { Loader } from "./components/Loader";
 
 function App() {
   const location = useLocation();

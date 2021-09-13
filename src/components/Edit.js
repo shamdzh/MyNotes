@@ -1,6 +1,5 @@
 import React, { useContext, useState } from "react";
 import { FirebaseContext } from "../context/firebase/firebaseContext";
-import axios from "axios";
 import { AlertContext } from "../context/alert/alertContext";
 
 export const Edit = ({ currentNote }) => {
