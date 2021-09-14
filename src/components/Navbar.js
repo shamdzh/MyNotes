@@ -4,7 +4,7 @@ import { AlertContext } from "../context/alert/alertContext";
 import { FirebaseContext } from "../context/firebase/firebaseContext";
 
 export const Navbar = () => {
-  const { auth, signOut } = useContext(FirebaseContext);
+  const { auth, logOut } = useContext(FirebaseContext);
   const { hide } = useContext(AlertContext);
   const history = useHistory();
   return localStorage.getItem('user') ?
@@ -14,14 +14,10 @@ export const Navbar = () => {
           <div className="navbar-brand">MY NOTES</div>
           <div className="userName d-flex align-items-center">
             <p>Добро пожаловать, {JSON.parse(localStorage.getItem('user')).displayName}</p>
-            <button className="outBtn btn btn-outline-light" type="submit" onClick={async () => {
-              await signOut(auth)
-                .then(() => {
+            <button className="outBtn btn btn-outline-light" type="submit" onClick={() => {
+                  logOut()
                   hide();
-                  console.log("Sign-out successful");
-                  localStorage.removeItem('user');
                   history.push("/auth");
-                })
             }}>
               Выйти
             </button>

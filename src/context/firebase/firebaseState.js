@@ -9,7 +9,9 @@ import {
   REMOVE_NOTE,
   EDIT_NOTE,
   SHOW_LOADER,
+  HIDE_LOADER,
   LOGIN,
+  LOGOUT
 } from "../types";
 import { initializeApp } from "firebase/app";
 
@@ -56,6 +58,8 @@ export const FirebaseState = ({ children }) => {
     await signInWithPopup(auth, provider)
       .then((result) => {
         localStorage.setItem("user", JSON.stringify(result.user));
+       axios.patch(`${url}/users/${result.user.uid}.json?auth=${JSON.parse(localStorage.getItem("user")).stsTokenManager.accessToken}`,
+        {email: result.user.email, name: result.user.displayName});
       })
       .catch((error) => {
         console.log(error);
@@ -64,14 +68,23 @@ export const FirebaseState = ({ children }) => {
     dispatch({ type: LOGIN });
   };
 
+  const logOut = async () => {
+    await signOut(auth).then(() => {
+                  console.log("logOut successful");
+                  localStorage.removeItem('user')
+                })
+
+    dispatch({ type: LOGOUT });
+  };
+
   // const logOut = () => dispatch({type: CHECK_LOGIN})
 
   const getNotes = async () => {
     showLoader();
-
-    const res = await axios.get(`${url}/notes.json?auth=${JSON.parse(localStorage.getItem("user")).stsTokenManager.accessToken}`);
+    const res = await axios.get(`${url}/users/${JSON.parse(localStorage.getItem("user")).uid}/notes.json?auth=${JSON.parse(localStorage.getItem("user")).stsTokenManager.accessToken}`);
 
     if (res.data == null) {
+      dispatch({ type: HIDE_LOADER });
       return;
     }
 
@@ -81,14 +94,8 @@ export const FirebaseState = ({ children }) => {
         id: key,
       };
     });
-
-    setTimeout(() => {
+    
       dispatch({ type: GET_NOTES, payload });
-      console.log("User:");
-      console.log(user);
-    }, 500);
-
-    console.log(payload);
   };
 
   const addNote = async (title, text) => {
@@ -104,7 +111,7 @@ export const FirebaseState = ({ children }) => {
 
     try {
       console.log("Пытаюсь отправить запрос на сервер...");
-      const res = await axios.post(`${url}/notes.json?auth=${JSON.parse(localStorage.getItem("user")).stsTokenManager.accessToken}`,
+      const res = await axios.post(`${url}/users/${JSON.parse(localStorage.getItem("user")).uid}/notes.json?auth=${JSON.parse(localStorage.getItem("user")).stsTokenManager.accessToken}`,
         note);
 
       const payload = {
@@ -120,7 +127,7 @@ export const FirebaseState = ({ children }) => {
 
   const removeNote = async (id) => {
     await axios.delete(
-      `${url}/notes/${id}.json?auth=${JSON.parse(localStorage.getItem("user")).stsTokenManager.accessToken}`
+      `${url}/users/${JSON.parse(localStorage.getItem("user")).uid}/notes/${id}.json?auth=${JSON.parse(localStorage.getItem("user")).stsTokenManager.accessToken}`
     );
 
     dispatch({
@@ -140,7 +147,7 @@ export const FirebaseState = ({ children }) => {
     try {
       console.log("Пытаюсь отправить запрос на сервер...");
       const res = await axios.put(
-        `${url}/notes/${id}.json?auth=${JSON.parse(localStorage.getItem("user")).stsTokenManager.accessToken}`,
+        `${url}/users/${JSON.parse(localStorage.getItem("user")).uid}/notes/${id}.json?auth=${JSON.parse(localStorage.getItem("user")).stsTokenManager.accessToken}`,
         {
           ...editedNotes,
         }
@@ -173,6 +180,7 @@ export const FirebaseState = ({ children }) => {
         currentNote: state.currentNote,
         check: state.check,
         login,
+        logOut,
         addNote,
         getNotes,
         getCurrentNote,

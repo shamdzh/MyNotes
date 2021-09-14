@@ -1,8 +1,10 @@
-import {ADD_NOTE, GET_NOTES, GET_CURRENT_NOTE, REMOVE_NOTE, EDIT_NOTE, SHOW_LOADER, LOGIN} from '../types'
+import {ADD_NOTE, GET_NOTES, GET_CURRENT_NOTE, REMOVE_NOTE, EDIT_NOTE, SHOW_LOADER, HIDE_LOADER, LOGIN, LOGOUT} from '../types'
 
 const handlers = {
     [SHOW_LOADER]: state => ({...state, loading: true}),
+    [HIDE_LOADER]: state => ({...state, loading: false}),
     [LOGIN]: state => ({...state, check: true}),
+    [LOGOUT]: state => ({...state, check: false, notes: []}),
     [ADD_NOTE]: (state, {payload}) => ({
         ...state,
         notes: [...state.notes, payload]
