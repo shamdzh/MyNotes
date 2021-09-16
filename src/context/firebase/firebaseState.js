@@ -1,5 +1,6 @@
 import React, { useReducer } from "react";
 import axios from "axios";
+import CryptoJS from 'crypto-js'
 import { FirebaseContext } from "./firebaseContext";
 import { FirebaseReducer } from "./firebaseReducer";
 import {
@@ -47,6 +48,7 @@ export const FirebaseState = ({ children }) => {
   const firestore = getFirestore();
   const [user] = useAuthState(auth);
   // -- Initialize Firebase  -- //
+
 
   const url = "https://mynotes-e2d75-default-rtdb.firebaseio.com";
 
@@ -110,9 +112,14 @@ export const FirebaseState = ({ children }) => {
       return str.split("-").reverse().join("-");
     }
 
+    // Encrypt
+    let ciphertext = CryptoJS.AES.encrypt(text, 'note').toString();
+
+  
+
     const note = {
       title,
-      text,
+      text: ciphertext,
       date: reverseString(new Date().toJSON().substr(0, 10)).replace(/-/g, "."),
     };
 
@@ -200,6 +207,7 @@ export const FirebaseState = ({ children }) => {
         signInWithPopup,
         signOut,
         provider,
+        CryptoJS
       }}
     >
       {children}

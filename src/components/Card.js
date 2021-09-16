@@ -5,9 +5,16 @@ import { AlertContext } from "../context/alert/alertContext";
 import { CSSTransition, TransitionGroup } from "react-transition-group";
 
 export const Card = ({ notes }) => {
-  const { getCurrentNote, removeNote } = useContext(FirebaseContext);
+  const { getCurrentNote, removeNote, CryptoJS } = useContext(FirebaseContext);
   const { show, hide } = useContext(AlertContext);
   const history = useHistory();
+
+
+  let decrypt = (noteText) => {
+    let bytes  = CryptoJS.AES.decrypt(noteText, 'note');
+    return bytes.toString(CryptoJS.enc.Utf8);
+  }
+
 
   return (
     <div class="cards__container d-flex flex-wrap justify-content-center">
@@ -44,7 +51,7 @@ export const Card = ({ notes }) => {
               </div>
               <div class="card-body">
                 <h5 class="card-title">{note.title}</h5>
-                <p class="card-text">{note.text}</p>
+                <p class="card-text">{decrypt(note.text)}</p>
               </div>
             </div>
           </CSSTransition>
