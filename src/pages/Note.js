@@ -29,7 +29,7 @@ export const Note = () => {
           class="btn_edit d-flex"
           onClick={() => {setEdit(true);}}>
           <div><img src="/img/pencil.png" /></div>
-          Редактировать заметку
+          Редактировать
         </div>
       </div>
     </div>

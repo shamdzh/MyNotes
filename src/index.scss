@@ -1,17 +1,14 @@
 @import "~bootstrap/scss/bootstrap";
 
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap");
 
 body {
   margin: 0;
-  font-family: 'Roboto', "Segoe UI", "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif;
+  font-family: "Roboto", "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans",
+    "Helvetica Neue", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  
 }
-
 
 .container {
   max-width: 1140px;
@@ -24,6 +21,11 @@ body {
     letter-spacing: 1px;
     padding-left: 20px;
     font-weight: 500;
+
+    @media (max-width: 768px) {
+      font-size: 1rem;
+    }
+
   }
   margin-bottom: 20px;
 }
@@ -31,8 +33,6 @@ body {
 .btnBox {
   text-align: center;
 }
-
-
 
 .note-form {
   padding-top: 20px;
@@ -47,6 +47,7 @@ body {
   border-radius: 5px;
 
   @media (max-width: 450px) {
+    font-size: 1.1rem;
     width: 90%;
   }
 }
@@ -62,7 +63,7 @@ hr {
 
 .cards__container {
   padding-top: 12px;
-//  margin-right: -25px;
+  //  margin-right: -25px;
 }
 
 .card {
@@ -124,6 +125,13 @@ hr {
 
   @media (max-width: 450px) {
     font-size: 0.8rem;
+
+    img {
+      width: 10px;
+      height: auto;
+      padding-bottom: 3px;
+      margin-right: 6px;
+    }
   }
 }
 
@@ -139,8 +147,6 @@ hr {
   border-right: 1px solid #333;
   margin: 0 10px;
 }
-
-
 
 //card animation
 
@@ -162,10 +168,18 @@ hr {
 .userName {
   color: #fff;
   margin-right: 20px;
-  
+
   p {
     margin-right: 20px;
     margin-bottom: 0;
+
+    @media (max-width: 768px) {
+      font-size: 0.8rem;
+    }
+
+    @media (max-width: 450px) {
+      display: none;
+    }
   }
 }
 
@@ -175,14 +189,34 @@ hr {
 
 .outBtn {
   padding: 3px 40px;
+
+  @media (max-width: 768px) {
+    padding: 2px 17px;
+  }
 }
 
 .currentNote {
   padding-top: 40px;
-  text-align: justify;
+  text-align: center;
 
   h1 {
     text-align: center;
+  }
+
+  .currentnote_title {
+    font-size: 2.2rem;
+
+    @media (max-width: 768px) {
+      font-size: 1.7rem;
+    }
+  }
+
+  .currentnote_text {
+    font-size: 1.1rem;
+
+    @media (max-width: 768px) {
+      font-size: 1rem;
+    }
   }
 }
 
@@ -191,7 +225,6 @@ hr {
   height: 100vh;
   display: flex;
   align-items: center;
-  
 }
 
 .auth_inner {
@@ -200,7 +233,6 @@ hr {
 
   @media (max-width: 1360px) {
     width: 77%;
-
   }
 
   @media (max-width: 1024px) {
@@ -212,9 +244,9 @@ hr {
   }
 }
 
-.auth_img, .auth_form {
+.auth_img,
+.auth_form {
   width: 50%;
-  
 
   @media (max-width: 768px) {
     width: 95%;
@@ -226,11 +258,9 @@ hr {
   text-align: center;
   background-color: #fff;
 
-
   @media (max-width: 425px) {
     height: 50vh;
-   }
-  
+  }
 
   .auth_title {
     font-size: 2rem;
@@ -239,13 +269,12 @@ hr {
 
     @media (max-width: 768px) {
       padding-top: 20px;
-     }
-    
+    }
   }
 
   .auth_subtitle {
     padding: 5px 15px;
-    
+
     font-weight: 400;
     color: rgb(136, 136, 136);
   }
@@ -253,8 +282,6 @@ hr {
 
 .auth_img {
   overflow: hidden;
-
-
 
   img {
     width: auto;
@@ -266,8 +293,6 @@ hr {
     }
   }
 }
-
-
 
 .authBtn {
   background-color: rgb(79, 130, 163);

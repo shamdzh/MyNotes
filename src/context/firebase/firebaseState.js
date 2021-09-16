@@ -28,7 +28,7 @@ export const FirebaseState = ({ children }) => {
     loading: false,
     check: false,
   };
-  
+
   // Your web app's Firebase configuration
   const firebaseConfig = {
     apiKey: "AIzaSyCpO_kNHjTh6LJXNNDHPmuJ4u90fmt7v08",
@@ -58,8 +58,8 @@ export const FirebaseState = ({ children }) => {
     await signInWithPopup(auth, provider)
       .then((result) => {
         localStorage.setItem("user", JSON.stringify(result.user));
-       axios.patch(`${url}/users/${result.user.uid}.json?auth=${JSON.parse(localStorage.getItem("user")).stsTokenManager.accessToken}`,
-        {email: result.user.email, name: result.user.displayName});
+        axios.patch(`${url}/users/${result.user.uid}.json?auth=${JSON.parse(localStorage.getItem("user")).stsTokenManager.accessToken}`,
+          { email: result.user.email, name: result.user.displayName });
       })
       .catch((error) => {
         console.log(error);
@@ -70,9 +70,9 @@ export const FirebaseState = ({ children }) => {
 
   const logOut = async () => {
     await signOut(auth).then(() => {
-                  console.log("logOut successful");
-                  localStorage.removeItem('user')
-                })
+      console.log("logOut successful");
+      localStorage.removeItem('user')
+    })
 
     dispatch({ type: LOGOUT });
   };
@@ -81,21 +81,28 @@ export const FirebaseState = ({ children }) => {
 
   const getNotes = async () => {
     showLoader();
-    const res = await axios.get(`${url}/users/${JSON.parse(localStorage.getItem("user")).uid}/notes.json?auth=${JSON.parse(localStorage.getItem("user")).stsTokenManager.accessToken}`);
+    try {
+      const res = await axios.get(`${url}/users/${JSON.parse(localStorage.getItem("user")).uid}/notes.json?auth=${JSON.parse(localStorage.getItem("user")).stsTokenManager.accessToken}`);
 
-    if (res.data == null) {
-      dispatch({ type: HIDE_LOADER });
-      return;
+      if (res.data == null) {
+        dispatch({ type: HIDE_LOADER });
+        return;
+      }
+
+      const payload = Object.keys(res.data).map((key) => {
+        return {
+          ...res.data[key],
+          id: key,
+        };
+      });
+
+      dispatch({ type: GET_NOTES, payload });
+    } catch (e) {
+      if ((e.message).includes('401')) {
+        logOut()
+      };
     }
 
-    const payload = Object.keys(res.data).map((key) => {
-      return {
-        ...res.data[key],
-        id: key,
-      };
-    });
-    
-      dispatch({ type: GET_NOTES, payload });
   };
 
   const addNote = async (title, text) => {
