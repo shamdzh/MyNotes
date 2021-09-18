@@ -49,10 +49,15 @@ export const FirebaseState = ({ children }) => {
   const [user] = useAuthState(auth);
   // -- Initialize Firebase  -- //
 
-
+  
   const url = "https://mynotes-e2d75-default-rtdb.firebaseio.com";
 
   const [state, dispatch] = useReducer(FirebaseReducer, initialState);
+
+  const decrypt = (noteText) => {
+    const bytes  = CryptoJS.AES.decrypt(noteText, 'note');
+    return bytes.toString(CryptoJS.enc.Utf8);
+  }
 
   const showLoader = () => dispatch({ type: SHOW_LOADER });
 
@@ -151,11 +156,14 @@ export const FirebaseState = ({ children }) => {
   };
 
   const editNote = async (id, date, title, text) => {
+    // Encrypt
+    let ciphertext = CryptoJS.AES.encrypt(text, 'note').toString();
+
     const editedNotes = {
       id,
       date,
       title,
-      text,
+      text: ciphertext,
     };
 
     try {
@@ -207,7 +215,8 @@ export const FirebaseState = ({ children }) => {
         signInWithPopup,
         signOut,
         provider,
-        CryptoJS
+        CryptoJS,
+        decrypt
       }}
     >
       {children}

@@ -124,10 +124,10 @@ hr {
   }
 
   @media (max-width: 450px) {
-    font-size: 0.8rem;
+    font-size: 0.9rem;
 
     img {
-      width: 10px;
+      width: 12px;
       height: auto;
       padding-bottom: 3px;
       margin-right: 6px;
@@ -198,6 +198,8 @@ hr {
 .currentNote {
   padding-top: 40px;
   text-align: center;
+
+  
 
   h1 {
     text-align: center;

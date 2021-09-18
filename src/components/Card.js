@@ -5,15 +5,12 @@ import { AlertContext } from "../context/alert/alertContext";
 import { CSSTransition, TransitionGroup } from "react-transition-group";
 
 export const Card = ({ notes }) => {
-  const { getCurrentNote, removeNote, CryptoJS } = useContext(FirebaseContext);
+  const { getCurrentNote, removeNote, decrypt } = useContext(FirebaseContext);
   const { show, hide } = useContext(AlertContext);
   const history = useHistory();
 
 
-  let decrypt = (noteText) => {
-    let bytes  = CryptoJS.AES.decrypt(noteText, 'note');
-    return bytes.toString(CryptoJS.enc.Utf8);
-  }
+
 
 
   return (

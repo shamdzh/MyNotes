@@ -3,9 +3,9 @@ import { FirebaseContext } from "../context/firebase/firebaseContext";
 import { AlertContext } from "../context/alert/alertContext";
 
 export const Edit = ({ currentNote }) => {
-  const [title, setTitle] = useState(currentNote.title);
-  const [text, setText] = useState(currentNote.text);
   const firebase = useContext(FirebaseContext);
+  const [title, setTitle] = useState(currentNote.title);
+  const [text, setText] = useState(firebase.decrypt(currentNote.text));
   const {show} = useContext(AlertContext);
 
   return (
