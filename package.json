@@ -2,6 +2,7 @@
   "name": "myNotes",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://shamdzh.github.io/mynotes/docs/",
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.15.4",
     "@testing-library/jest-dom": "^5.12.0",
