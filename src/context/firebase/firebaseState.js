@@ -32,7 +32,7 @@ export const FirebaseState = ({ children }) => {
 
   // Your web app's Firebase configuration
   const firebaseConfig = {
-    apiKey: "AIzaSyCpO_kNHjTh6LJXNNDHPmuJ4u90fmt7v08",
+    apiKey: "",
     authDomain: "mynotes-e2d75.firebaseapp.com",
     databaseURL: "https://mynotes-e2d75-default-rtdb.firebaseio.com",
     projectId: "mynotes-e2d75",
